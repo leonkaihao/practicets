@@ -1,63 +1,63 @@
 // test resolve
-function example1() {
+function testPromise1() {
   new Promise((resolve) => {
     setTimeout(resolve, 2000);
   }).then(() => {
-    console.log("example1: resolved");
+    console.log("testPromise1: resolved");
   });
 }
-example1();
+testPromise1();
 
 // test reject
-function example2() {
+function testPromise2() {
   new Promise((resolve, reject) => {
     setTimeout(reject, 2000);
   })
     .then(() => {
-      console.log("example2: resolved");
+      console.log("testPromise2: resolved");
     })
     .catch(() => {
-      console.error("example2: rejected");
+      console.error("testPromise2: rejected");
     });
 }
-example2();
+testPromise2();
 
 // another reject test
 // we do not wrap setTimeOut but
-function example3() {
+function testPromise3() {
   let promise: Promise<any>;
   setTimeout(() => {
     promise = Promise.reject("paaaa");
 
     promise
       .then(() => {
-        console.log("example3: resolved");
+        console.log("testPromise3: resolved");
       })
       .catch(() => {
-        console.error("example3: rejected");
+        console.error("testPromise3: rejected");
       });
   }, 2000);
 }
-example3();
+testPromise3();
 
 // test reolve and reject chain
 // next step will be called when current step is fullfilled.
-function example4() {
+function testPromise4() {
   let promise: Promise<any>;
   promise = Promise.resolve("done")
     .then((data) => {
-      console.log(`example4: resolved 1: ${data}`);
-      return data;
+      console.log(`testPromise4: resolved 1: ${data}`);
+      return data; // returned data will be carried to the next resolve stage by a new Promise.
     })
     .then((data) => {
-      throw `example4: rejected: ${data}`;
+      throw `testPromise4: rejected: ${data}`;
     })
     .catch((err) => {
       throw `${err} 1`;
     })
     .then((data) => {
       // to be ignored
-      console.log(`example4: resolved 2: ${data}`);
+      console.log(`testPromise4: resolved 2: ${data}`);
     })
     .catch((err) => {
       throw `${err} 2`;
@@ -69,4 +69,4 @@ function example4() {
       console.error(err);
     });
 }
-example4();
+testPromise4();
