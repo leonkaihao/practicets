@@ -1,4 +1,16 @@
-// example1: a simplest approach to generator.
+// example1: a simple return from generator.
+function* simple() {
+  return 1;
+}
+
+function simpleTest() {
+  const val = simple();
+  console.log(`simpleTest: ${val.next().value}`);
+}
+
+simpleTest();
+
+// example2: a simplest iterator approach to generator.
 function* foo() {
   for (let i = 0; i < 10; i++) {
     yield i;
@@ -14,7 +26,7 @@ function testYield1() {
 }
 testYield1();
 
-// example2: see how yield splits a process
+// example3: see how yield splits a process
 function doSthFirst(val: number) {
   console.log(`deal with ${val} first`);
 }
@@ -35,7 +47,7 @@ function testYield2() {
 }
 testYield2();
 
-// example3: yield promise
+// example4: yield promise
 function foo3() {
   return new Promise((resolve) => {
     setTimeout(() => {
