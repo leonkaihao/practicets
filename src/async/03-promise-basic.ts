@@ -23,7 +23,7 @@ function testPromise2() {
 testPromise2();
 
 // another reject test
-// we do not wrap setTimeOut but
+// we do not wrap setTimeOut but set setTimeout wrap a Promise
 function testPromise3() {
   let promise: Promise<any>;
   setTimeout(() => {
